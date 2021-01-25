@@ -1,6 +1,6 @@
 # to make numpy divisions show decimal values by default:
 # https://stackoverflow.com/questions/1799527/numpy-show-decimal-values-in-array-results
-# from __future__ import division
+from __future__ import division
 import csv
 import os
 from os import path
@@ -191,15 +191,13 @@ class MicroSatelliteProfiler:
                     all_tumor
                 )
 
-        print ("{} microsatellites writen to: {}_{}.txt".format(
+        print "{} microsatellites writen to: {}_{}.txt".format(
             self.mode.title(),
             self.output_prefix,
             self.mode
         ))
-        print (
-            "Calculation of the {} microsatellites finished successfully."
-            .format(self.mode)
-        )
+        print "Calculation of the {} microsatellites finished successfully.".format(self.mode)
+        
 
     def _log_normal_result(self, result):
         self.read_lengths_normal.append(result)
@@ -256,7 +254,7 @@ class MicroSatelliteProfiler:
 
         if self.is_unphased:
             for chromo in self.chromosomes:
-                print ("Processing chromosome: ", chromo)
+                print "Processing chromosome: ", chromo
                 # Unphased Normal run
                 self._run_in_pool(
                     utils.unphased,
@@ -285,10 +283,10 @@ class MicroSatelliteProfiler:
         Run phased/unphased MSI detection for normal/tumor bamfiles in a
         multiprocessing Pool
         """
-        print ("{}: Extracting MS repeats from {} bam file..\n".format(
+        print "{}: Extracting MS repeats from {} bam file..\n".format(
             self.mode.upper(),
             tumor_type
-        ))
+        )
         if self.number_of_processors == 1:
             logging_method(func_to_run(self, sites, bam_file))
         else:
@@ -328,10 +326,10 @@ class MicroSatelliteProfiler:
             pool.close()
             pool.join()
 
-        print ("{}: {} bam file processed correctly..\n".format(
+        print "{}: {} bam file processed correctly..\n".format(
             self.mode.upper(),
             tumor_type
-        ))
+        )
 
     def _set_fasta_dict(self):
         for chromosome in self.chromosomes:

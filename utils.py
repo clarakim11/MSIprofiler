@@ -22,7 +22,7 @@ def find_repeats(seq, flank_size, repeat_units, min_score=MIN_SCORE):
     bases = len(seq)
     flank_size = flank_size - 1
     # save output as a list of lists
-    out = [];
+    out = []
     exclude = set()  # use sets: they are much faster to apply 'in'
     for ru in repeat_units:
         positions_motif = range(0, ru)
@@ -284,7 +284,7 @@ def phased(msi_obj, sites, bam_path):
                                               5] + "\t" + refset_now[
                                               6] + "\t" + snp_read + "\t" + \
                                           str(site[1])
-                                if key_now in list(dict_out):
+                                if dict_out.has_key(key_now):
                                     dict_out[key_now] = np.append(
                                         dict_out[key_now], difference)
                                 else:
@@ -374,7 +374,7 @@ def unphased(msi_obj, sites, bam_path):
                                               2] + "\t" + site[3] + "\t" + \
                                           site[4] + "\t" + \
                                           site[5] + "\t" + site[6]
-                                if key_now in list(dict_out):
+                                if dict_out.has_key(key_now):
                                     dict_out[key_now] = np.append(
                                         dict_out[key_now], difference)
                                 else:
@@ -479,3 +479,5 @@ def find_repeats_reference(seq,flank_size,chromo,min_score):
         else:
             base+=1
     return out
+
+    hello hello i'm gonna add random stuff
