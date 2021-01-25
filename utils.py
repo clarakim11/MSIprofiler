@@ -479,5 +479,3 @@ def find_repeats_reference(seq,flank_size,chromo,min_score):
         else:
             base+=1
     return out
-
-    hello hello i'm gonna add random stuff
