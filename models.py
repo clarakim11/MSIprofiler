@@ -195,7 +195,7 @@ class MicroSatelliteProfiler:
             self.mode.title(),
             self.output_prefix,
             self.mode
-        ))
+        )
         print "Calculation of the {} microsatellites finished successfully.".format(self.mode)
         
 
