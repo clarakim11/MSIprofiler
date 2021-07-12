@@ -368,14 +368,14 @@ class MicroSatelliteProfiler:
         for name in common_keys:
             nor = all_normal[name]
             canc = all_tumor[name]
-            if isinstance(nor, int) == False and isinstance(canc,
-                                                            int) == False:
-                if len(nor) >= self.min_coverage and len(
-                        canc) >= self.min_coverage:
-                    pval_ks = stats.ks_2samp(nor, canc)[1]
-                    outf.write(name + "\t" + ",".join(
-                        [str(x) for x in nor]) + "\t" + ",".join(
-                        [str(x) for x in canc]) + "\t" + str(pval_ks) + "\n")
+            if isinstance(nor, int) == False and isinstance(canc,int) == False:
+                if len(nor) >= self.min_coverage and len(canc) >= self.min_coverage:
+                    #pval_ks = stats.ks_2samp(nor, canc)[1]
+                    pval_chi2 = stats.chisquare(f_obs=canc, f_exp=nor)
+                    if pval_chi2 < 0.05:
+                        outf.write(name + "\t" + ",".join(
+                            [str(x) for x in nor]) + "\t" + ",".join(
+                            [str(x) for x in canc]) + "\t" + str(pval_chi2) + "\n")
 
     def _write_unphased_output(self, outf, common_keys, all_normal, all_tumor):
         for name in common_keys:

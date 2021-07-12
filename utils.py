@@ -186,10 +186,14 @@ def phased(msi_obj, sites, bam_path):
     with pysam.AlignmentFile(bam_path, "rb") as bamfile:
         dict_out = {}
         for site in sites:
+
+            #c: parsing info from bed file
             start = int(site[1])
             end = int(site[2])
             chr = site[0]
             #chr = str(site[0])
+
+            #c: can this line potentially throw errors?
             bases = [site[3], site[4]]
             reads = [
                 read for read in bamfile.fetch(
@@ -200,6 +204,7 @@ def phased(msi_obj, sites, bam_path):
                 )
                 ]  ## keep this as is, do not put conditions inside here
 
+            #c: find coverage for each site
             reads = [
                 read for read in reads if read.is_proper_pair and
                 read.is_duplicate == False and
@@ -207,7 +212,7 @@ def phased(msi_obj, sites, bam_path):
                 ]
             if len(reads) > msi_obj.min_coverage:
                 for read in reads:
-                    read_sequence = read.seq
+                    read_sequence = read.seq #c: .seq is deprecated
                     # read_sequence = read.query_alignment_sequence
                     reps = find_repeats(
                         read_sequence,
