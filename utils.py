@@ -289,7 +289,7 @@ def phased(msi_obj, sites, bam_path):
                                               5] + "\t" + refset_now[
                                               6] + "\t" + snp_read + "\t" + \
                                           str(site[1])
-                                if key_now in list(dict_out):
+                                if dict_out.has_key(key_now):
                                     dict_out[key_now] = np.append(
                                         dict_out[key_now], difference)
                                 else:
@@ -314,7 +314,7 @@ def unphased(msi_obj, sites, bam_path):
                      read.mapping_quality >= msi_obj.mapping_quality]
             if len(reads) > msi_obj.min_coverage:
                 for read in reads:
-                    start_read = read.reference_start
+                    start_read = read.reference_start;
                     end_read = read.reference_end
                     read_sequence = read.seq
                     reps =  find_repeats_target(read_sequence,
@@ -328,8 +328,8 @@ def unphased(msi_obj, sites, bam_path):
                         except:
                             continue
                         for microsatellite in reps:
-                            ru = microsatellite[0]
-                            rs = microsatellite[1]
+                            ru = microsatellite[0];
+                            rs = microsatellite[1];
                             re = microsatellite[2]
                             if start != start_read + rs + 1:  # do not consider if there are ins/del upstream of the repeat
                                 continue
@@ -355,22 +355,22 @@ def unphased(msi_obj, sites, bam_path):
                             posfl = (start_read + rs - msi_obj.flank_size)
                             if posfl >= start_read:
                                 flank_left = read_sequence[
-                                             rs - msi_obj.flank_size:rs]
+                                             rs - msi_obj.flank_size:rs];
                                 mismatches_left = sum(a != b for a, b in
                                                       zip(flank_left,
                                                           flank_left_ref))
                             else:
-                                flank_left = ""
+                                flank_left = "";
                                 mismatches_left = 10000
                             posflr = start_read + re + msi_obj.flank_size
                             if posflr <= end_read:
                                 flank_right = read_sequence[
-                                              re:re + msi_obj.flank_size]
+                                              re:re + msi_obj.flank_size];
                                 mismatches_right = sum(a != b for a, b in
                                                        zip(flank_right,
                                                            flank_right_ref))
                             else:
-                                flank_right = ""
+                                flank_right = "";
                                 mismatches_right = 10000
                             mismatches = mismatches_left + mismatches_right
                             if mismatches <= msi_obj.tolerated_mismatches:
@@ -379,7 +379,7 @@ def unphased(msi_obj, sites, bam_path):
                                               2] + "\t" + site[3] + "\t" + \
                                           site[4] + "\t" + \
                                           site[5] + "\t" + site[6]
-                                if key_now in list(dict_out):
+                                if dict_out.has_key(key_now):
                                     dict_out[key_now] = np.append(
                                         dict_out[key_now], difference)
                                 else:
