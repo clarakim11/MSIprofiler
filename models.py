@@ -196,10 +196,8 @@ class MicroSatelliteProfiler:
             self.output_prefix,
             self.mode
         )
-        print (
-            "Calculation of the {} microsatellites finished successfully."
-            .format(self.mode)
-        )
+        print "Calculation of the {} microsatellites finished successfully.".format(self.mode)
+        
 
     def _log_normal_result(self, result):
         self.read_lengths_normal.append(result)
